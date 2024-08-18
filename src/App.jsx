@@ -4,7 +4,9 @@ import Home from "./component/Home.jsx";
 // import LoginPage from "./component/LoginPage.jsx";
 import Cart  from "./component/Cart.jsx";
 import Footer from "./component/Footer.jsx";
+import Paso from "./component/Paso.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
@@ -15,7 +17,8 @@ function App() {
       {/* <Home></Home> */}
       {/* <RegisterPage></RegisterPage> */}
       {/* <LoginPage></LoginPage> */}
-      <Cart></Cart>
+      <Paso></Paso>
+      {/* <Cart></Cart> */}
       <Footer></Footer>
     </>
   );

@@ -1,7 +1,6 @@
 import Header from './Header.jsx'
 import CardPizza from './CardPizza.jsx'
 import pizzeriaHeader from '../assets/imgs/pizzeriaHeader.png';
-import { useState } from "react";
 import { pizzas } from "../pizzas.js";
 import Row from "react-bootstrap/Row";
 import { Container } from 'react-bootstrap';
@@ -9,7 +8,7 @@ import { Container } from 'react-bootstrap';
 
 const Home = () => { 
 
-  const [listaPizzas, setlistaPizzas] = useState(pizzas);
+  // const [listaPizzas, setlistaPizzas] = useState(pizzas);
    
   return (
     <>
@@ -22,7 +21,7 @@ const Home = () => {
 
       <Container fluid>
         <Row xs={1} md={2} className="g-4">
-          {listaPizzas.map((pizza) => (
+          {pizzas.map((pizza) => (
             <CardPizza key={pizza.id} pizza={pizza} />
           ))}
         </Row>
