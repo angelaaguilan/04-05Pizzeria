@@ -20,8 +20,19 @@ const Cart3 = () => {
 
 
   // onAddProduct en el ejemplo
-  const agregaPizza = (pizza) => {
-    setListaPizzas([...listaPizzas, pizza]);
+  const agregaPizza = (id, name, price) => {
+    // pizzaEnLista es item en el ejemplo
+    if (listaPizzas.find((pizzaEnLista) => pizzaEnLista.id === id)) {
+      const producto = listaPizzas.map(pizzaEnLista => pizzaEnLista.id === id ? { ...pizzaEnLista, cantidad: pizzaEnLista.cantidad + 1 } :
+        pizzaEnLista
+      ); 
+      return setListaPizzas([...producto]);
+    };
+
+    setListaPizzas([
+      ...listaPizzas,
+      { id: id, name: name, price: price, cantidad: 1 },
+    ]);
   };
   console.log(listaPizzas);
   
@@ -32,12 +43,27 @@ const Cart3 = () => {
           <Col xs={12} md={2} className="d-flex flex-column">
             {/* LISTADO DE PIZZAS A PAGAR */}
             <div>
-              Pizzas a pagar
+              Total a pagar: {total}
               <form>
                 <ul>
                   {listaPizzas.length ? (
-
-                    <Form.Text> Carro no vacío </Form.Text>
+                    <>
+                      {listaPizzas.map((producto) => (
+                        <Form key={producto.id}>
+                          <Form.Text name="name">
+                            Pizza {producto.name}
+                          </Form.Text>
+                          <Form.Text name="price">
+                            Precio: ${producto.price}
+                          </Form.Text>
+                          <Button name="resta">-</Button>
+                          <Form.Text name="cantidad">
+                            {producto.cantidad}
+                          </Form.Text>
+                          <Button name="suma">+</Button>
+                        </Form>
+                      ))}
+                    </>
                   ) : (
                     <Form.Text> Carro vacío </Form.Text>
                   )}
@@ -66,7 +92,12 @@ const Cart3 = () => {
                   />
                   <Form.Text name="name">Pizza {pizza.name}</Form.Text>
                   <Form.Text name="price">Precio: ${pizza.price}</Form.Text>
-                  <Button onClick={() => agregaPizza(pizza)} name="agregar">
+                  <Button
+                    onClick={() =>
+                      agregaPizza(pizza.id, pizza.name, pizza.price)
+                    }
+                    name="agregar"
+                  >
                     Agregar
                   </Button>
                 </Form>
