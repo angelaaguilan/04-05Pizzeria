@@ -13,42 +13,37 @@ export const CardPizza = ({ pizza }) => {
   
   return (
     <>
+      <Card style={styleCard} key={pizza.id}>
+        <Card.Header style={{ height: "auto" }}>
+          <Card.Img variant="top" src={pizza.img} style={{ width: "100%" }} />
+          <Card.Title className="mt-3">Pizza {pizza.name}</Card.Title>
+          <Card.Text>{pizza.desc}</Card.Text>
+        </Card.Header>
 
-            <Card style={styleCard} key={pizza.id}>
-              <Card.Header style={{ height: "auto" }}>
-                <Card.Img
-                  variant="top"
-                  src={pizza.img}
-                  style={{ width: "100%" }}
-                />
-                <Card.Title className="mt-3">Pizza {pizza.name}</Card.Title>
-                <Card.Text>{pizza.desc}</Card.Text>
-              </Card.Header>
-              <Card.Body className="text-center">
-                <Card.Text className="h5 mb-2">
-                  <Image src={PizzaTrozo} /> Ingredientes:
-                </Card.Text>
-                <Card.Text>
-                  <ul>
-                    {ingredientes.map((ingrediente, index) => (
-                      <li key={index}> {ingrediente} </li>
-                    ))}
-                  </ul>
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer className="p-4 text-center">
-                <Card.Text className="h4 mb-4"> Precio: ${precio}</Card.Text>
-                <Button variant="outline-dark" className="mx-3">
-                  Ver más <Image src={eyes} />
-                </Button>
-                <Button variant="dark" className="mx-3">
-                  Añadir <Image src={carroCompra} />
-                </Button>
-              </Card.Footer>
-            </Card>
-          
-        
- 
+        <Card.Body className="text-center">
+          <Card.Text className="h5 mb-2">
+            <Image src={PizzaTrozo} /> Ingredientes:
+          </Card.Text>
+          <Card.Text>
+            <ul>
+              {ingredientes.map((ingrediente, index) => (
+                <li key={index}> {ingrediente} </li>
+              ))}
+            </ul>
+          </Card.Text>
+        </Card.Body>
+
+          <Card.Footer className="p-4 text-center">
+            <Card.Text className="h4 mb-4"> Precio: ${precio}</Card.Text>
+            <Button variant="outline-dark" className="mx-3">
+              Ver más <Image src={eyes} />
+            </Button>
+            <Button variant="dark" className="mx-3" type="submit">
+              Añadir <Image src={carroCompra} />
+            </Button>
+          </Card.Footer>
+
+      </Card>
     </>
   );
 };

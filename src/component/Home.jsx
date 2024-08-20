@@ -7,8 +7,6 @@ import { Container } from 'react-bootstrap';
 
 
 const Home = () => { 
-
-  // const [listaPizzas, setlistaPizzas] = useState(pizzas);
    
   return (
     <>
