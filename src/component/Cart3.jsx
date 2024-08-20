@@ -12,30 +12,48 @@ import Col from "react-bootstrap/Col";
 const Cart3 = () => {
   //  allproducts en el ejemplo, son los que se añaden al carrito
   const [listaPizzas, setListaPizzas] = useState([]);
+  // es total en el ejemplo
   const [total, setTotal] = useState(0);
-  //  countProducts en el ejemplo, son los que se añaden al carrito
+  //  countProducts en el ejemplo, es un contador de productos
   const [cantidadPizzas, setCantidadPizzas] = useState(0);
-
-  const [carroVacio, setcarroVacio] = useState(false);
+  // Pizza es el Product en el ejemplo
 
 
   // onAddProduct en el ejemplo
-  const agregaPizza = (id, name, price) => {
-    // pizzaEnLista es item en el ejemplo
-    if (listaPizzas.find((pizzaEnLista) => pizzaEnLista.id === id)) {
-      const producto = listaPizzas.map(pizzaEnLista => pizzaEnLista.id === id ? { ...pizzaEnLista, cantidad: pizzaEnLista.cantidad + 1 } :
-        pizzaEnLista
-      ); 
-      return setListaPizzas([...producto]);
-    };
+  const agregaPizza = pizza => {
 
-    setListaPizzas([
+    // pizzaEnLista es item en el ejemplo
+    // busca en la lista, el ID que se está agregando
+      if (listaPizzas.find(pizzaEnLista => pizzaEnLista.id === pizza.id)) {
+        // obtiene de la lista de pizzas 
+        const pizzas = listaPizzas.map(pizzaEnLista => 
+          pizzaEnLista.id === pizza.id ?
+          // si lo encuentra, retorna los datos para ser cargados
+           { ...pizzaEnLista, cantidad: pizzaEnLista.cantidad + 1 }
+           : pizzaEnLista
+        );
+//        console.log(pizza.price);
+       
+      setTotal(total + pizza.price);   
+       return setListaPizzas([...pizzas]);
+     }
+
+    
+    // primera carga de las pizzas en la lista   
+    setTotal(total + pizza.price);
+    setListaPizzas([  
       ...listaPizzas,
-      { id: id, name: name, price: price, cantidad: 1 },
+      {
+        id: pizza.id,
+        name: pizza.name,
+        price: pizza.price,
+        cantidad: 1
+      },
     ]);
   };
-  console.log(listaPizzas);
-  
+
+
+
   return (
     <>
       <Container fluid>
@@ -48,17 +66,17 @@ const Cart3 = () => {
                 <ul>
                   {listaPizzas.length ? (
                     <>
-                      {listaPizzas.map((producto) => (
-                        <Form key={producto.id}>
+                      {listaPizzas.map(pizza => (
+                        <Form key={pizza.id}>
                           <Form.Text name="name">
-                            Pizza {producto.name}
+                            Pizza {pizza.name}
                           </Form.Text>
                           <Form.Text name="price">
-                            Precio: ${producto.price}
+                            Precio: ${pizza.price}
                           </Form.Text>
                           <Button name="resta">-</Button>
                           <Form.Text name="cantidad">
-                            {producto.cantidad}
+                            {pizza.cantidad}
                           </Form.Text>
                           <Button name="suma">+</Button>
                         </Form>
@@ -92,12 +110,7 @@ const Cart3 = () => {
                   />
                   <Form.Text name="name">Pizza {pizza.name}</Form.Text>
                   <Form.Text name="price">Precio: ${pizza.price}</Form.Text>
-                  <Button
-                    onClick={() =>
-                      agregaPizza(pizza.id, pizza.name, pizza.price)
-                    }
-                    name="agregar"
-                  >
+                  <Button onClick={() => agregaPizza(pizza)} name="agregar">
                     Agregar
                   </Button>
                 </Form>
