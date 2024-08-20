@@ -66,11 +66,9 @@ const Cart3 = () => {
                 <ul>
                   {listaPizzas.length ? (
                     <>
-                      {listaPizzas.map(pizza => (
+                      {listaPizzas.map((pizza) => (
                         <Form key={pizza.id}>
-                          <Form.Text name="name">
-                            Pizza {pizza.name}
-                          </Form.Text>
+                          <Form.Text name="name">Pizza {pizza.name}</Form.Text>
                           <Form.Text name="price">
                             Precio: ${pizza.price}
                           </Form.Text>
@@ -78,7 +76,12 @@ const Cart3 = () => {
                           <Form.Text name="cantidad">
                             {pizza.cantidad}
                           </Form.Text>
-                          <Button name="suma">+</Button>
+                          <Button
+                            name="suma"
+                            onClick={() => agregaPizza(pizza)}
+                          >
+                            +
+                          </Button>
                         </Form>
                       ))}
                     </>
