@@ -21,19 +21,25 @@ const Cart3 = () => {
   
   // Agrega, suma o resta las pizzas a la lista
   const agregaPizza = (pizza, operacion) => {
-
+    
     if (operacion === "agregar") {
-
+      const found = listaPizzas.findIndex(Lista => Lista.id === pizza.id)
+  
+      if (found<0) {
       // primera carga de cada pizza seleccionada a la lista y total
       setTotal(total + pizza.price);
-      setListaPizzas([...listaPizzas,
-      {
-        id: pizza.id,
-        name: pizza.name,
-        price: pizza.price,
-        cantidad: 1
-      },
+      setListaPizzas([
+        ...listaPizzas,
+        {
+          id: pizza.id,
+          name: pizza.name,
+          price: pizza.price,
+          cantidad: 1,
+        },
       ]);
+      } else {
+        alert("La pizza ya se encuentra en el carrito de compras")
+      }
 
     } else if (operacion === "sumar") {
           
@@ -102,16 +108,12 @@ const Cart3 = () => {
                               Precio: ${pizza.price}
                             </Form.Text>
                             <Button
-                              name="restar"
                               onClick={() => agregaPizza(pizza, "restar")}
-                            >
-                              -
-                            </Button>
+                            >-</Button>
                             <Form.Text name="cantidad">
                               {pizza.cantidad}
                             </Form.Text>
                             <Button
-                              name="sumar"
                               onClick={() => agregaPizza(pizza, "sumar")}
                             >
                               +
@@ -148,11 +150,8 @@ const Cart3 = () => {
                     <Form.Text name="name">Pizza {pizza.name}</Form.Text>
                     <Form.Text name="price">Precio: ${pizza.price}</Form.Text>
                     <Button
-                      name="agregar"
                       onClick={() => agregaPizza(pizza, "agregar")}
-                    >
-                      Agregar
-                    </Button>
+                    >Agregar</Button>
                   </Form>
                 ))}
               </div>
