@@ -98,12 +98,12 @@ export const Cart = () => {
             <Form>
               <Form.Group className="d-flex align-items-center">
                 <Button variant="outline-light" className="text-primary">
-                  Total: $ {total}
+                  Total: ${Intl.NumberFormat("de-DE").format(total)}
                 </Button>
                 <Button
                   variant="primary"
                   type="submit"
-                  style={{ width: "50%" }}
+                  style={{ width: "30%" }}
                 >
                   Pagar
                 </Button>
@@ -124,15 +124,22 @@ export const Cart = () => {
                         >
                           <div className="ms-2 me-auto">
                             <div className="fw-bold">Pizza {pizza.name}</div>
-                            Precio: ${pizza.price}
+                            Precio: $
+                            {Intl.NumberFormat("de-DE").format(pizza.price)}
                           </div>
-                          <Button onClick={() => agregaPizza(pizza, "restar")}>
+                          <Button
+                            style={{ width: "10%" }}
+                            onClick={() => agregaPizza(pizza, "restar")}
+                          >
                             -
                           </Button>
-                          <Form.Text name="cantidad">
+                          <Form.Text name="cantidad" className="m-2">
                             {pizza.cantidad}
                           </Form.Text>
-                          <Button onClick={() => agregaPizza(pizza, "sumar")}>
+                          <Button
+                            style={{ width: "10%" }}
+                            onClick={() => agregaPizza(pizza, "sumar")}
+                          >
                             +
                           </Button>
                         </ListGroup.Item>
